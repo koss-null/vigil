@@ -46,11 +46,7 @@ function updateSummaryCards(data) {
                 <div class="bg-orange-500 h-2 rounded-full progress-bar" style="width: ${data.memory.used_percent}%"></div>
             </div>
         </div>
-        <div class="bg-white rounded-lg shadow p-4 card compact-card">
-            <h3 class="text-lg font-semibold text-gray-700 mb-2">Load</h3>
-            <p class="text-2xl font-bold text-purple-600">${data.load_average.load_1_min.toFixed(2)}</p>
-            <p class="text-sm text-gray-600">1/5/15 min: ${data.load_average.load_1_min.toFixed(2)}/${data.load_average.load_5_min.toFixed(2)}/${data.load_average.load_15_min.toFixed(2)}</p>
-        </div>
+        ${createLoadCard(data.load_average, data.timestamp)}
     `;
 }
 
@@ -60,7 +56,6 @@ function updateDetailedInfo(data) {
     detailedInfo.innerHTML = `
         ${createCPUCard(data.cpu)}
         ${createDisksCard(data.disks)}
-        ${createLoadCard(data.load_average, data.timestamp)}
     `;
 }
 
