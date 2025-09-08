@@ -1,35 +1,43 @@
 package api
 
 import (
+	"embed"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
-	"path/filepath"
 	"time"
 
 	"github.com/koss-null/vigil/internal/agent"
 )
 
+//go:embed web/static/index.html
+var staticIndex embed.FS
+
+//go:embed web/static/app.js
+var staticJS embed.FS
+
+//go:embed web/static/styles.css
+var staticCSS embed.FS
+
 type Handler struct {
-	agent     *agent.SystemAgent
-	staticDir string
+	agent *agent.SystemAgent
 }
 
-func NewHandler(agent *agent.SystemAgent, staticDir string) *Handler {
+func NewHandler(agent *agent.SystemAgent) *Handler {
 	return &Handler{
-		agent:     agent,
-		staticDir: staticDir,
+		agent: agent,
 	}
 }
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/", "/index.html":
-		h.serveStaticFile(w, r, "index.html")
+		h.serveIndexHTML(w, r)
 	case "/static/js/app.js":
-		h.serveStaticFile(w, r, "js/app.js")
+		h.serveAppJS(w, r)
 	case "/static/css/styles.css":
-		h.serveStaticFile(w, r, "css/styles.css")
+		h.serveStylesCSS(w, r)
 
 	case "/api/system-info":
 		h.getSystemInfo(w, r)
@@ -43,20 +51,43 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *Handler) serveStaticFile(w http.ResponseWriter, r *http.Request, filePath string) {
-	fullPath := filepath.Join(h.staticDir, filePath)
+func (h *Handler) serveIndexHTML(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	h.serveEmbeddedFile(w, r, staticIndex, "web/static/index.html")
+}
 
-	// Set appropriate content type based on file extension
-	switch filepath.Ext(filePath) {
-	case ".js":
-		w.Header().Set("Content-Type", "application/javascript")
-	case ".css":
-		w.Header().Set("Content-Type", "text/css")
-	case ".html":
-		w.Header().Set("Content-Type", "text/html")
+func (h *Handler) serveAppJS(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/javascript")
+	h.serveEmbeddedFile(w, r, staticJS, "web/static/app.js")
+}
+
+func (h *Handler) serveStylesCSS(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/css")
+	h.serveEmbeddedFile(w, r, staticCSS, "web/static/styles.css")
+}
+
+func (h *Handler) serveEmbeddedFile(w http.ResponseWriter, r *http.Request, fs embed.FS, filePath string) {
+	file, err := fs.Open(filePath)
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+	defer file.Close()
+
+	// Get file info for caching headers
+	info, err := file.Stat()
+	if err != nil {
+		http.Error(w, "Could not get file info", http.StatusInternalServerError)
+		return
 	}
 
-	http.ServeFile(w, r, fullPath)
+	// Set caching headers (1 hour for static assets)
+	if filePath != "web/static/index.html" {
+		w.Header().Set("Cache-Control", "public, max-age=3600")
+	}
+
+	// Serve the content
+	http.ServeContent(w, r, filePath, info.ModTime(), file.(io.ReadSeeker))
 }
 
 func (h *Handler) getSystemInfo(w http.ResponseWriter, r *http.Request) {

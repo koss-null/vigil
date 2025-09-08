@@ -22,7 +22,7 @@ func main() {
 	go sysAgent.StartMonitoring()
 
 	// Initialize API handlers
-	handler := api.NewHandler(sysAgent, "web/static/")
+	handler := api.NewHandler(sysAgent)
 
 	// Start HTTP server
 	log.Printf("Starting server on %s", cfg.ServerAddress)
