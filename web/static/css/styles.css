@@ -1,31 +1,159 @@
+/* Solarized Dark Color Scheme - Enhanced Contrast */
+.bg-solarized-base03 { background-color: #001f27; }
+.bg-solarized-base02 { background-color: #002b36; }
+.bg-solarized-base01 { background-color: #073642; }
+.bg-solarized-base00 { background-color: #586e75; }
+.bg-solarized-base0 { background-color: #657b83; }
+.bg-solarized-base1 { background-color: #839496; }
+.bg-solarized-base2 { background-color: #93a1a1; }
+.bg-solarized-base3 { background-color: #eee8d5; }
+.bg-solarized-yellow { background-color: #b58900; }
+.bg-solarized-orange { background-color: #cb4b16; }
+.bg-solarized-red { background-color: #dc322f; }
+.bg-solarized-magenta { background-color: #d33682; }
+.bg-solarized-violet { background-color: #6c71c4; }
+.bg-solarized-blue { background-color: #268bd2; }
+.bg-solarized-cyan { background-color: #2aa198; }
+.bg-solarized-green { background-color: #859900; }
+
+.text-solarized-base03 { color: #001f27; }
+.text-solarized-base02 { color: #002b36; }
+.text-solarized-base01 { color: #073642; }
+.text-solarized-base00 { color: #586e75; }
+.text-solarized-base0 { color: #657b83; }
+.text-solarized-base1 { color: #839496; }
+.text-solarized-base2 { color: #93a1a1; }
+.text-solarized-base3 { color: #eee8d5; }
+.text-solarized-yellow { color: #b58900; }
+.text-solarized-orange { color: #cb4b16; }
+.text-solarized-red { color: #dc322f; }
+.text-solarized-magenta { color: #d33682; }
+.text-solarized-violet { color: #6c71c4; }
+.text-solarized-blue { color: #268bd2; }
+.text-solarized-cyan { color: #2aa198; }
+.text-solarized-green { color: #859900; }
+
+.border-solarized-base03 { border-color: #001f27; }
+.border-solarized-base02 { border-color: #002b36; }
+.border-solarized-base01 { border-color: #073642; }
+.border-solarized-base00 { border-color: #586e75; }
+.border-solarized-base0 { border-color: #657b83; }
+.border-solarized-base1 { border-color: #839496; }
+.border-solarized-base2 { border-color: #93a1a1; }
+.border-solarized-base3 { border-color: #eee8d5; }
+.border-solarized-yellow { border-color: #b58900; }
+.border-solarized-orange { border-color: #cb4b16; }
+.border-solarized-red { border-color: #dc322f; }
+.border-solarized-magenta { border-color: #d33682; }
+.border-solarized-violet { border-color: #6c71c4; }
+.border-solarized-blue { border-color: #268bd2; }
+.border-solarized-cyan { border-color: #2aa198; }
+.border-solarized-green { border-color: #859900; }
+
+.bg-gray-100, .bg-gray-200, .bg-gray-300 {
+    background-color: #073642 !important;
+}
+
+.text-gray-600, .text-gray-700, .text-gray-800 {
+    color: #93a1a1 !important;
+}
+
+.text-blue-600 {
+    color: #268bd2 !important;
+}
+
+.text-orange-600 {
+    color: #cb4b16 !important;
+}
+
+.text-green-600 {
+    color: #859900 !important;
+}
+
+.text-purple-600 {
+    color: #6c71c4 !important;
+}
+
+.text-red-700 {
+    color: #dc322f !important;
+}
+
+.bg-blue-600 {
+    background-color: #268bd2 !important;
+}
+
+.bg-orange-500 {
+    background-color: #cb4b16 !important;
+}
+
+.bg-green-500 {
+    background-color: #859900 !important;
+}
+
+.bg-red-500 {
+    background-color: #dc322f !important;
+}
+
+.bg-blue-400 {
+    background-color: #268bd2 !important;
+}
+
 .progress-bar {
     transition: width 0.3s ease-in-out;
 }
 
 .card {
     transition: all 0.3s ease;
+    background-color: #002b00 !important;
+    border: 1px solid #073642 !important;
 }
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    border-color: #586e75 !important;
 }
 
-/* Memory card specific styling */
-.memory-card {
-    min-height: auto !important;
-    height: auto;
+/* Add a keyframe animation for a subtle loading pulse effect */
+@keyframes pulse-fade {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
-.memory-card .h-2 {
-    height: 0.5rem;
+.animate-pulse {
+    animation: pulse-fade 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Compact cards */
-.compact-card {
-    padding: 1rem !important;
+.temp-indicator {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
 }
 
-.compact-card h3 {
-    margin-bottom: 0.75rem !important;
+.temp-cool { background-color: #2aa198; }
+.temp-normal { background-color: #b58900; }
+.temp-warm { background-color: #cb4b16; }
+.temp-hot { background-color: #dc322f; }
+
+/* Ensure all text uses our color scheme */
+h1, h2, h3, h4, h5, h6, p, span, div, a {
+    color: inherit !important;
+}
+
+/* Navigation styling */
+nav {
+    background-color: #002b36 !important;
+    border-bottom: 1px solid #073642 !important;
+}
+
+nav a:hover {
+    color: #268bd2 !important;
+    background-color: #073642 !important;
 }
