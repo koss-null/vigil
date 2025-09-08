@@ -6,6 +6,8 @@
 
 Vigil is a lightweight, self-hosted system monitoring solution for home servers and small clusters. It provides real-time monitoring of system resources across multiple Linux machines with a clean web interface.
 
+<img src="Screenshot.png" alt="Screenshot" width="720px" height="auto">
+
 ## Features
 
 - **Real-time System Monitoring**: CPU, memory, disk usage, and load averages
