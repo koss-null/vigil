@@ -4,15 +4,15 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Development-yellow)
 
-Vigil is a lightweight, self-hosted system monitoring solution for home servers and small clusters. It provides real-time monitoring of system resources across multiple Ubuntu machines with a clean web interface.
+Vigil is a lightweight, self-hosted system monitoring solution for home servers and small clusters. It provides real-time monitoring of system resources across multiple Linux machines with a clean web interface.
 
 ## Features
 
 - **Real-time System Monitoring**: CPU, memory, disk usage, and load averages
-- **Multi-node Support**: Monitor multiple machines from a single dashboard
+- **Multi-node Support**: Monitor multiple machines from a single dashboar (planned)d
 - **Temperature Monitoring**: CPU and motherboard temperature sensors
 - **Web Interface**: Responsive dashboard built with Tailwind CSS
-- **Auto-discovery**: Automatic detection of nodes in local network
+- **Auto-discovery**: Automatic detection of nodes in local network (planned)
 - **Service Management**: Control systemd services via web interface (planned)
 - **Power Management**: Remote shutdown and reboot capabilities (planned)
 
