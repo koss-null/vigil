@@ -1,5 +1,6 @@
 all:
 	go run ./cmd/...
 
+.PHONY: build
 build:
-	go build ./cmd/... -o /build/vigil
+	go build -o ./build/vigil ./cmd/...
